@@ -1,0 +1,26 @@
+<div class="filter-container">
+    <div class="filter-container">
+        <h3>Filter Expenses</h3>
+
+        <div class="filter-fields">
+            <div class="filter-item">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" [(ngModel)]="startDate" />
+            </div>
+            <div class="filter-item">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" [(ngModel)]="endDate" />
+            </div>
+            <div class="filter-item">
+                <button (click)="filterExpenses()"> Filter </button>
+            </div>
+        </div>
+    </div>
+
+    <h3>All Expenses</h3>
+    <div class="expense-list">
+        <div *ngFor="let expense of filteredExpenses">
+            <p>{{ expense.date }} - {{ expense.category }} - {{ expense.amount }}</p>
+        </div>
+    </div>
+</div>

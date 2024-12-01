@@ -1,0 +1,118 @@
+.filter-container {
+    background-color: hsl(206, 21%, 15%);
+    padding: 20px;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: whitesmoke;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+}
+
+.filter-container h3 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #E1DDD2;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.filter-container label {
+    display: block;
+    font-size: 1rem;
+    color: #E1DDD2;
+    margin-bottom: 5px;
+}
+
+.filter-fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    width: calc(33.33% - 10px);
+    min-width: 200px;
+}
+
+.filter-container input[type="date"],
+.filter-container button {
+    margin-top: 5px;
+    font-size: 1rem;
+    border: 2px solid #E1DDD2;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: hsl(206, 21%, 20%);
+    color: whitesmoke;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.filter-container input[type="date"]:focus,
+.filter-item button:hover {
+    background-color: hsl(206, 21%, 25%);
+    outline: none;
+    color: #FFD700;
+}
+
+.filter-item button {
+    background-color: #FFD700;
+    color: black;
+    font-weight: bold;
+    margin-top: 8%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filter-item label {
+    font-size: 1rem;
+    color: #E1DDD2;
+}
+
+.filter-container div p {
+    font-size: 1rem;
+    margin: 5px 0;
+    background-color: hsl(206, 21%, 25%);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.filter-container div p:hover {
+    background-color: hsl(206, 21%, 30%);
+}
+
+.expense-list {
+    max-height: 100%;
+    overflow-y: auto;
+    margin-top: 15px;
+    padding-right: 10px;
+    padding-top: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #FFD700 hsl(206, 21%, 20%);
+}
+
+.expense-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.expense-list::-webkit-scrollbar-thumb {
+    background-color: #FFD700;
+    border-radius: 5px;
+}
+
+.expense-list::-webkit-scrollbar-track {
+    background-color: hsl(206, 21%, 20%);
+}
+
+.editButton {
+    color: green;
+    margin: 1%;
+}

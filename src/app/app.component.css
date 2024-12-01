@@ -1,0 +1,27 @@
+.mainContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-part,
+.bottom-part {
+    width: 100%;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+}

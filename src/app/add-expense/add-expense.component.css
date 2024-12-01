@@ -1,0 +1,59 @@
+.form-container {
+    background-color: hsl(206, 21%, 15%);
+    padding: 4%;
+    border-radius: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: whitesmoke;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#taskForm {
+    font-size: 1.2rem;
+}
+
+#taskForm h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #E1DDD2;
+    margin-bottom: 3%;
+    margin-top: 2%;
+}
+
+#amount,
+#date,
+#category,
+#submit_button {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    border: 2px solid #E1DDD2;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: hsl(206, 21%, 20%);
+    color: whitesmoke;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#submit_button {
+    margin-top: 2%;
+    margin-bottom: 0;
+    background-color: #FFD700;
+    color: black;
+    font-weight: bold;
+}
+
+#submit_button:hover {
+    background-color: hsl(206, 21%, 25%);
+    outline: none;
+    color: #FFD700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#taskForm input[type="date"]:focus {
+    background-color: hsl(206, 21%, 25%);
+    outline: none;
+    color: #FFD700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
