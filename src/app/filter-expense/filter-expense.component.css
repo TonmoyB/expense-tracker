@@ -285,8 +285,7 @@ table tr:hover {
 #amount,
 #date,
 #category,
-#submit_button,
-#cancel_button {
+#submit_button {
     margin-top: 5px;
     margin-bottom: 15px;
     font-size: 1rem;
@@ -309,10 +308,14 @@ table tr:hover {
 }
 
 #cancel_button {
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-left: 2%;
     background-color: hsl(206, 21%, 25%);
     color: #FFD700;
     font-weight: bold;
     border: none;
+    padding: 20px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
