@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { title } from 'process';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  title = "expense-tracker";
   expenses: { id: string; amount: number; date: string; category: string }[] =
     [];
   totalExpense: number = 0;
@@ -37,10 +39,16 @@ export class AppComponent {
       (sum, expense) => sum + expense.amount,
       0
     );
+    console.log(this.totalExpense);
 
     this.categoryExpenses = this.expenses.reduce((acc, expense) => {
       acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
       return acc;
     }, {} as { [key: string]: number });
+  }
+
+  updateTotalExpense(): void {
+    this.loadExpenses();
+    this.updateSummary();
   }
 }

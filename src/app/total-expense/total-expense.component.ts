@@ -43,7 +43,7 @@ export class TotalExpenseComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private calculateSummary(
+  calculateSummary(
     expenses: { amount: number; category: string }[]
   ): void {
     this.totalExpenses = expenses.reduce(
@@ -55,4 +55,10 @@ export class TotalExpenseComponent implements OnInit, OnChanges, OnDestroy {
       return acc;
     }, {} as { [key: string]: number });
   }
+
+  updateTotalExpense(): void {
+    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+    this.calculateSummary(expenses);
+  }
+
 }

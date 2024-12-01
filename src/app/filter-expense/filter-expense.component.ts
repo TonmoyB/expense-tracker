@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, OnChanges, EventEmitter, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-filter-expense',
@@ -21,6 +21,8 @@ export class FilterExpenseComponent implements OnInit, OnChanges, OnDestroy {
   }[] = [];
   startDate: string = '';
   endDate: string = '';
+
+  @Output() expenseUpdated = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.filteredExpenses = [...this.expenses];
@@ -63,8 +65,14 @@ export class FilterExpenseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteExpense(id: string): void {
-    this.expenses = this.expenses.filter((expense) => expense.id !== id);
-    this.filteredExpenses = [...this.expenses];
-    localStorage.setItem('expenses', JSON.stringify(this.expenses));
+    const confirmDelete = window.confirm('Are you sure you want to delete this expense?');
+
+    if (confirmDelete) {
+      this.expenses = this.expenses.filter((expense) => expense.id !== id);
+      this.filteredExpenses = [...this.expenses];
+      localStorage.setItem('expenses', JSON.stringify(this.expenses));
+      
+      this.expenseUpdated.emit();
+    }
   }
 }
