@@ -3,26 +3,40 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  expenses: { amount: number; date: string; category: string }[] = [];
+  expenses: { id: string; amount: number; date: string; category: string }[] =
+    [];
   totalExpense: number = 0;
   categoryExpenses: { [key: string]: number } = {};
-  categories: string[] = ['Food', 'Travel', 'Medicines', 'Household'];
 
   constructor() {
     this.loadExpenses();
   }
 
-  loadExpenses() {
+  loadExpenses(): void {
     const savedExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
     this.expenses = savedExpenses;
     this.updateSummary();
   }
 
-  updateSummary() {
-    this.totalExpense = this.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  onExpenseAdded(newExpense: {
+    id: string;
+    amount: number;
+    date: string;
+    category: string;
+  }): void {
+    this.expenses = [...this.expenses, newExpense];
+    localStorage.setItem('expenses', JSON.stringify(this.expenses));
+    this.updateSummary();
+  }
+
+  updateSummary(): void {
+    this.totalExpense = this.expenses.reduce(
+      (sum, expense) => sum + expense.amount,
+      0
+    );
 
     this.categoryExpenses = this.expenses.reduce((acc, expense) => {
       acc[expense.category] = (acc[expense.category] || 0) + expense.amount;

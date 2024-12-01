@@ -1,15 +1,15 @@
 <div class="summary-container">
-    <h2>Total Amount : {{ totalExpenses }}</h2>
+    <h2>Total Amount : {{ totalExpenses | currency}}</h2>
 
     <div class="category-container">
         <div class="category-column">
-            <p>{{ categories[0] }}: {{ categoryExpenses[categories[0]] || 0 }}</p>
-            <p>{{ categories[1] }}: {{ categoryExpenses[categories[1]] || 0 }}</p>
+            <p>{{ categories[0] }}: {{ categoryExpenses[categories[0]] || 0 | currency }}</p>
+            <p>{{ categories[1] }}: {{ categoryExpenses[categories[1]] || 0 | currency }}</p>
         </div>
 
         <div class="category-column">
-            <p>{{ categories[2] }}: {{ categoryExpenses[categories[2]] || 0 }}</p>
-            <p>{{ categories[3] }}: {{ categoryExpenses[categories[3]] || 0 }}</p>
+            <p>{{ categories[2] }}: {{ categoryExpenses[categories[2]] || 0 | currency }}</p>
+            <p>{{ categories[3] }}: {{ categoryExpenses[categories[3]] || 0 | currency }}</p>
         </div>
     </div>
 </div>

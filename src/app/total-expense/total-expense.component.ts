@@ -1,26 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-total-expense',
   templateUrl: './total-expense.component.html',
-  styleUrls: ['./total-expense.component.css']
+  styleUrls: ['./total-expense.component.css'],
 })
-export class TotalExpenseComponent implements OnInit {
-  totalExpenses: number = 0;
-  categoryExpenses: { [key: string]: number } = {};
-  categories = ['Food', 'Travel', 'Medicines', 'Household'];
+export class TotalExpenseComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() totalExpenses: number = 0;
+  @Input() categoryExpenses: { [key: string]: number } = {};
+  categories: string[] = ['Food', 'Travel', 'Medicines', 'Household'];
 
-  ngOnInit() {
-    this.calculateSummary();
+  constructor() { }
+
+  ngOnInit(): void {
+    window.addEventListener('storage', this.onStorageChange.bind(this));
   }
 
-  calculateSummary() {
-    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-    this.totalExpenses = expenses.reduce((sum: number, expense: any) => sum + expense.amount, 0);
-    this.categoryExpenses = {};
-    expenses.forEach((expense: any) => {
-      this.categoryExpenses[expense.category] =
-        (this.categoryExpenses[expense.category] || 0) + expense.amount;
-    });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['totalExpenses'] || changes['categoryExpenses']) {
+      console.log('Total expense or category breakdown updated:', {
+        totalExpenses: this.totalExpenses,
+        categoryExpenses: this.categoryExpenses,
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('storage', this.onStorageChange.bind(this));
+  }
+
+  onStorageChange(event: StorageEvent): void {
+    if (event.key === 'expenses' && event.newValue) {
+      const updatedExpenses = JSON.parse(event.newValue);
+      this.calculateSummary(updatedExpenses);
+    }
+  }
+
+  private calculateSummary(
+    expenses: { amount: number; category: string }[]
+  ): void {
+    this.totalExpenses = expenses.reduce(
+      (sum, expense) => sum + expense.amount,
+      0
+    );
+    this.categoryExpenses = expenses.reduce((acc, expense) => {
+      acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
+      return acc;
+    }, {} as { [key: string]: number });
   }
 }

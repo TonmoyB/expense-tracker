@@ -1,15 +1,16 @@
 <div class="mainContainer">
   <div class="left-column">
     <div class="total-expense-container">
-      <app-total-expense></app-total-expense>
+      <app-total-expense [totalExpenses]="totalExpense" [categoryExpenses]="categoryExpenses">
+      </app-total-expense>
     </div>
 
     <div class="add-expense-container">
-      <app-add-expense></app-add-expense>
+      <app-add-expense (expenseAdded)="onExpenseAdded($event)"></app-add-expense>
     </div>
   </div>
 
   <div class="right-column">
-    <app-filter-expense></app-filter-expense>
+    <app-filter-expense [expenses]="expenses"></app-filter-expense>
   </div>
 </div>
