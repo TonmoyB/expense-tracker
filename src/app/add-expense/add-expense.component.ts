@@ -17,11 +17,16 @@ export class AddExpenseComponent {
   date: string = '';
   category: string = '';
 
-  constructor() {}
+  constructor() { }
 
   saveExpense(): void {
     if (!this.amount || !this.date || !this.category) {
       alert('Please fill out all fields!!!');
+      return;
+    }
+
+    if (this.amount <= 0) {
+      alert('Enter Positive Amount!!!');
       return;
     }
 
