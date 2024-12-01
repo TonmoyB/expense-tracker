@@ -308,31 +308,11 @@ table tr:hover {
     font-weight: bold;
 }
 
-#submit_button:hover {
-    background-color: hsl(206, 21%, 25%);
-    outline: none;
-    color: #FFD700;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
 #cancel_button {
     background-color: hsl(206, 21%, 25%);
     color: #FFD700;
     font-weight: bold;
     border: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#cancel_button:hover {
-    background-color: hsl(206, 21%, 30%);
-    color: whitesmoke;
-}
-
-#taskForm input[type="date"]:focus,
-#taskForm select:focus {
-    background-color: hsl(206, 21%, 25%);
-    outline: none;
-    color: #FFD700;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
