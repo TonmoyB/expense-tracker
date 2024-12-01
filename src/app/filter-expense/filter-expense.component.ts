@@ -19,8 +19,17 @@ export class FilterExpenseComponent implements OnInit, OnChanges, OnDestroy {
     date: string;
     category: string;
   }[] = [];
+  editedExpense: { id: string; amount: number; date: string; category: string } = {
+    id: '',
+    amount: 0,
+    date: '',
+    category: ''
+  };
+
   startDate: string = '';
   endDate: string = '';
+  isModalOpen: boolean = false;
+  categories: string[] = ['Food', 'Travel', 'Medicines', 'Household'];
 
   @Output() expenseUpdated = new EventEmitter<void>();
 
@@ -55,14 +64,27 @@ export class FilterExpenseComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  editExpense(expense: {
-    id: string;
-    amount: number;
-    date: string;
-    category: string;
-  }): void {
-    console.log('Editing expense:', expense);
+  openModal(expense: { id: string; amount: number; date: string; category: string }): void {
+    this.editedExpense = { ...expense };
+    this.isModalOpen = true;
   }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+  }
+
+  updateExpense(): void {
+    const index = this.expenses.findIndex(exp => exp.id === this.editedExpense.id);
+    if (index !== -1) {
+      this.expenses[index] = { ...this.editedExpense };
+      this.filteredExpenses = [...this.expenses];
+
+      localStorage.setItem('expenses', JSON.stringify(this.expenses));
+      this.expenseUpdated.emit();
+      this.closeModal();
+    }
+  }
+
 
   deleteExpense(id: string): void {
     const confirmDelete = window.confirm('Are you sure you want to delete this expense?');
@@ -71,7 +93,7 @@ export class FilterExpenseComponent implements OnInit, OnChanges, OnDestroy {
       this.expenses = this.expenses.filter((expense) => expense.id !== id);
       this.filteredExpenses = [...this.expenses];
       localStorage.setItem('expenses', JSON.stringify(this.expenses));
-      
+
       this.expenseUpdated.emit();
     }
   }
