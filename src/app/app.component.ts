@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { title } from 'process';
+import { ExpenseService } from './expense.service';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +8,16 @@ import { title } from 'process';
 })
 export class AppComponent {
   title = "expense-tracker";
-  expenses: { id: string; amount: number; date: string; category: string }[] =
-    [];
+  expenses: { id: string; amount: number; date: string; category: string }[] = [];
   totalExpense: number = 0;
   categoryExpenses: { [key: string]: number } = {};
 
-  constructor() {
+  constructor(private expenseService: ExpenseService) {
     this.loadExpenses();
   }
 
   loadExpenses(): void {
-    const savedExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-    this.expenses = savedExpenses;
+    this.expenses = this.expenseService.loadExpenses();
     this.updateSummary();
   }
 
@@ -30,25 +28,12 @@ export class AppComponent {
     category: string;
   }): void {
     this.expenses = [...this.expenses, newExpense];
-    localStorage.setItem('expenses', JSON.stringify(this.expenses));
+    this.expenseService.saveExpenses(this.expenses);
     this.updateSummary();
   }
 
   updateSummary(): void {
-    this.totalExpense = this.expenses.reduce(
-      (sum, expense) => sum + expense.amount,
-      0
-    );
-    console.log(this.totalExpense);
-
-    this.categoryExpenses = this.expenses.reduce((acc, expense) => {
-      acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
-      return acc;
-    }, {} as { [key: string]: number });
-  }
-
-  updateTotalExpense(): void {
-    this.loadExpenses();
-    this.updateSummary();
+    this.totalExpense = this.expenseService.calculateTotal(this.expenses);
+    this.categoryExpenses = this.expenseService.calculateCategoryExpenses(this.expenses);
   }
 }
